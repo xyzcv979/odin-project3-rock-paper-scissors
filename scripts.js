@@ -39,13 +39,29 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+let playerScore = 0;
+let computerScore = 0;
+const btns = document.querySelectorAll("#playerBtns");
+btns.forEach((button) => {
+    button.addEventListener("click", (e) => {
+        const playerSelection = e.target.innerText;
+        const computerSelection = getComputerChoice();
+        const result = playRound(playerSelection, computerSelection)
+        const displayResultDiv = document.querySelector("#displayResult");
+        displayResultDiv.textContent = result;
+        if (result.includes("You win!")) {
+            playerScore += 1;
+            document.querySelector("#playerScore").textContent = "Player Score: " + playerScore;
+        } else if (result.includes("You lose!")) {
+            computerScore += 1;
+            document.querySelector("#computerScore").textContent = "Computer Score: " + computerScore;
+        }
+    });
+});
+
+
 function playGame() {
-    let numOfRounds = 5;
-    for (let i = 0; i < numOfRounds; i++) {
-        let playerSelection = prompt("Enter decision");
-        let computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
-    }
+    
 }
 
-playGame();
+// playGame();
